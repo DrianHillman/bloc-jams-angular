@@ -10,6 +10,14 @@
       .state('landing', {
         url: '/',
         templateUrl: '/templates/landing.html'
+      })
+      .state('album', {
+        url: '/album',
+        templateUrl: '/templates/album.html'
+      })
+      .state('collection', {
+        url: '/collection',
+        templateUrl: '/templates/collection.html'
       });
   }
 
