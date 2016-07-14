@@ -3,12 +3,6 @@
     var SongPlayer = {};
 
     /**
-     * @desc Retrieves album data from the injected 'Fixtures' service.
-     * @returns {[type]} [description]
-     */
-    var currentAlbum = Fixtures.getAlbum();
-
-    /**
       * @desc Buzz object audio file
       * @type {Object}
       */
@@ -21,8 +15,7 @@
       */
     var setSong = function(song){
       if (currentBuzzObject) {
-        currentBuzzObject.stop();
-        SongPlayer.currentSong.playing = null;
+        stopSong();
       }
 
       currentBuzzObject = new buzz.sound(song.audioUrl, {
@@ -35,11 +28,21 @@
 
     /**
      * @function playSong
-     * @desc Plays the selected audio file. This function also sets the Angular state property 'playing', which is attached to the song, accordingly.
+     * @desc Plays the selected audio file. Sets the 'playing' Angular state property.
+     * @param   {Object} song   is an element within the album data
      */
     var playSong = function(song){
       currentBuzzObject.play();
       song.playing = true;
+    };
+
+    /**
+     * @function stopSong
+     * @desc Stops the current Buzz sound object.
+     */
+    var stopSong = function(){
+      currentBuzzObject.stop();
+      SongPlayer.currentSong.playing = null;
     };
 
     /**
@@ -49,8 +52,14 @@
      * @returns {Integer}       the index of the song
      */
     var getSongIndex = function(song){
-      return currentAlbum.songs.indexOf(song);
+      return SongPlayer.currentAlbum.songs.indexOf(song);
     };
+
+    /**
+     * @desc Retrieves album data from the injected 'Fixtures' service.
+     * @type {Object}
+     */
+    SongPlayer.currentAlbum = Fixtures.getAlbum();
 
     /**
      * @desc The selected song object from the data.
@@ -89,18 +98,35 @@
 
     /**
      * @function SongPlayer.previous
-     * @desc This public method changes the player to the previous song
-     * @returns {[type]} [description]
+     * @desc This public method changes the player to the previous song.
      */
     SongPlayer.previous = function(){
       var currentSongIndex = getSongIndex(SongPlayer.currentSong);
       currentSongIndex--;
 
       if (currentSongIndex < 0) {
-        currentBuzzObject.stop();
-        SongPlayer.currentSong.playing = null;
+        stopSong();
       }else {
-        var song = currentAlbum.songs[currentSongIndex];
+        var song = SongPlayer.currentAlbum.songs[currentSongIndex];
+        setSong(song);
+        playSong(song);
+      }
+    };
+
+    /**
+     * @function SongPlayer.next
+     * @desc This public method changes the player to the next song.
+     */
+    SongPlayer.next = function(){
+      var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+      currentSongIndex++;
+      var song = SongPlayer.currentAlbum.songs[currentSongIndex];
+
+      if (currentSongIndex >= SongPlayer.currentAlbum.songs.length) {
+        song = SongPlayer.currentAlbum.songs[0];
+        setSong(song);
+        playSong(song);
+      }else {
         setSong(song);
         playSong(song);
       }
