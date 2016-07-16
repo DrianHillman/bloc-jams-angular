@@ -49,11 +49,29 @@
           return {width: percentString()};
         };
 
+        /**
+         * @function thumbStyle
+         * @desc  is a public method that provides the style syntax to edit the head circle of the seek bar
+         * @returns {Object}  that contains the css propery as the key, and a string for its value.
+         */
+        scope.thumbStyle = function() {
+          return {left: percentString()};
+        };
+
+        /**
+         * @function  onClickSeekBar
+         * @desc  updates the seek bar value based on its percentage
+         * @param   {Object} event javascript event object or click handler
+         */
         scope.onClickSeekBar = function(event){
           var percent = calculatePercent(seekBar, event);
           scope.value = percent * scope.max;
         };
 
+        /**
+         * @function trackThumb
+         * @desc updates the thumb value to track based on mouse movement
+         */
         scope.trackThumb = function() {
           $document.bind('mousemove.thumb', function(event) {
             var percent = calculatePercent(seekBar, event);
