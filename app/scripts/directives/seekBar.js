@@ -6,7 +6,7 @@
      * @desc Calculates the horizontal percent along the seek bar where the event occurred.
      * @param   {Object} seekBar  holds the element that matches the directive, which we can call jQuery methods on.
      * @param   {Object} event    javascript event object, or click handler
-     * @returns {Integer}         the calculated percentage value of where the event occured on the seekbar.
+     * @returns {Number}         the calculated percentage value of where the event occured on the seekbar.
      */
     var calculatePercent = function(seekBar, event) {
       var offsetX = event.pageX - seekBar.offset().left;
@@ -101,7 +101,7 @@
         /**
          * @function notifyOnChange
          * @desc notifies onChange that the scope's value has been changed
-         * @param   {Integer} newValue is the value to be updated.
+         * @param   {Number} newValue is the value to be updated.
          */
         var notifyOnChange = function(newValue){
           if (typeof scope.onChange === 'function') {

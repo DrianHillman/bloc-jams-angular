@@ -80,6 +80,12 @@
     SongPlayer.currentTime = null;
 
     /**
+     * @desc Current volume setting of currently playing song
+     * @type {Number}
+     */
+    SongPlayer.volume = 70;
+
+    /**
      * @function SongPlayer.play
      * @desc This public method plays the selected song.
      * @param   {Object} song  is a song from data
@@ -88,6 +94,7 @@
       song = song || SongPlayer.currentSong;
       if (currentBuzzObject !== song){
         setSong(song);
+        SongPlayer.setVolume(SongPlayer.volume);
         playSong(song);
 
       }else if (SongPlayer.currentSong === song) {
@@ -153,6 +160,12 @@
       if (currentBuzzObject) {
         currentBuzzObject.setTime(time);
       }
+    };
+
+    SongPlayer.setVolume = function(vol){
+        if (currentBuzzObject){
+          currentBuzzObject.setVolume(vol);
+        }
     };
 
     return SongPlayer;
