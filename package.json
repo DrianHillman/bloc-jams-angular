@@ -1,10 +1,13 @@
 {
-  "name": "bloc-frontend-project-starter",
-  "version": "0.0.2",
-  "description": "Starter project for the Bloc Frontend Web Development",
+  "name": "bloc-jams-angular-by-drian",
+  "version": "1.0.0",
+  "engines": {
+    "node": "8.1.4"
+  },
+  "description": "Project for Bloc Frontend Web Development",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bloc/bloc-frontend-project-starter"
+    "url": "https://github.com/DrianHillman/bloc-jams-angular"
   },
   "main": "server.js",
   "scripts": {
