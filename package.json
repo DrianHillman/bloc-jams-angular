@@ -13,7 +13,7 @@
   "scripts": {
     "start": "node server.js"
   },
-  "author": "Bloc Inc",
+  "author": "Drian Hillman",
   "license": "ISC",
   "dependencies": {
     "hapi": "~7.5.0",
